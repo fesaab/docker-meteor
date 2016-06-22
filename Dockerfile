@@ -15,8 +15,10 @@ RUN npm install \
   && npm cache clear
 
 RUN ln -s node_modules app/programs/server/node_modules \
-  && ln -s node_modules app/programs/web.browser/node_modules \
-  && ln -s node_modules app/programs/web.cordova/node_modules
+  && ln -s node_modules app/programs/web.browser/node_modules 
+
+# used when the mobile app is configured
+#RUN ln -s node_modules app/programs/web.cordova/node_modules
 
 WORKDIR /opt/app
 

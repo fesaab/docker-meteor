@@ -1,21 +1,23 @@
 # docker-meteor
-Automatically build & deploy Meteor 1.3 apps with Docker (and Kubernetes).
+Automatically build Meteor 1.3 apps with Docker.
 
 ## Description
 This is a simple Dockerfile for running Meteor 1.3+ with Docker. This implements the new NPM integration included in Meteor 1.3, and installs all necessary NPM modules.
 
-## Usage
-Just place this file into the root of your Meteor installation and the appropriate [.dockerignore](https://github.com/markoshust/docker-meteor/blob/master/.dockerignore) file. Then execute the build command by running:
+## Build docker image
+Just place all the files into the root of your Meteor installation. Then execute the build command by running:
 
 ```
-docker build -t foo/barbaz:1.0.0 .
+./dockerbuilddeploy.sh saab-tools 2.0.0
 ```
 
-## Advanced Usage
-Place the [.dockerbuilddeploy](https://github.com/markoshust/docker-meteor/blob/master/.dockerbuilddeploy) in the root of your Meteor directory, update it's contents where appropriate, make it executable, then run the command:
+This will build a Docker image with the appropriate tag (ex. saab/saab-tools:2.0.0).
 
-```
-./.dockerbuilddeploy staging 1.0.0
-```
+## Run docker image
+To run the docker image just copy and update the .dockerenv.sample to a .dockerenv file and run:
 
-This will build a Docker image for the appropriate environment (staging/production) and the appropriate tag (ex. 1.0.0), push it to Google Cloud, then deploy it to Kubernetes via a rolling-update. This requires Google Container Registry enabled and gcloud cli to be installed, and knowledge of Kubernetes, but can deploy your Meteor app without downtime on an awesome architecture.
+---
+docker run --env-file .dockerenv -d -p 3000:3000 saab/saab-tools:2.0.0
+---
+
+The -d is to run in background and the -p is to map the port 3000 on the docker daemon to the port 3000 on the host.

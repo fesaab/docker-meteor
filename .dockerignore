@@ -1,4 +1,6 @@
 .build
+.git*
+.idea
 .docker*
 .meteor/local
 node_modules

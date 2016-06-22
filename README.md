@@ -16,8 +16,8 @@ This will build a Docker image with the appropriate tag (ex. saab/saab-tools:2.0
 ## Run docker image
 To run the docker image just copy and update the .dockerenv.sample to a .dockerenv file and run:
 
----
+```
 docker run --env-file .dockerenv -d -p 3000:3000 saab/saab-tools:2.0.0
----
+```
 
 The -d is to run in background and the -p is to map the port 3000 on the docker daemon to the port 3000 on the host.
